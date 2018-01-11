@@ -22,15 +22,14 @@ public class Websocket2PipeGateway extends WebSocketServer
 
     private RandomAccessFile pipe;
 
-    private static String RESULT_OK = "OK";
+    private static final String RESULT_OK = "OK";
 
-    private static String RESULT_NO_PIPE_CONNECTION = "NO PIPE CONNECTION";
+    private static final String RESULT_NO_PIPE_CONNECTION = "NO PIPE CONNECTION";
 
     private static final Charset CHARSET_UTF8 = Charset.forName("UTF-8");
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
-
         Websocket2PipeGateway websocket2Pipe = new Websocket2PipeGateway();
         websocket2Pipe.start();
         System.out.println("Press enter to exit");
@@ -118,7 +117,7 @@ public class Websocket2PipeGateway extends WebSocketServer
                 throw new IllegalArgumentException();
         }
 
-        return createResponse(true, "");
+        return createResponse(true, RESULT_OK);
     }
 
     private String handlePipeMessage(Message parsedMessage)
@@ -146,7 +145,7 @@ public class Websocket2PipeGateway extends WebSocketServer
             }
             catch (EOFException e)
             {
-                return RESULT_OK;
+                return createResponse(true, RESULT_OK);
             }
             catch (Exception e)
             {
@@ -155,7 +154,7 @@ public class Websocket2PipeGateway extends WebSocketServer
         }
         else
         {
-            return RESULT_NO_PIPE_CONNECTION;
+            return createResponse(false, RESULT_NO_PIPE_CONNECTION);
         }
     }
 
