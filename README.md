@@ -3,7 +3,7 @@ Starts a local websocket server on port 12000. Used to connect to a local named 
 Uses JSON formatted messages to control and communicate.
 
 Create connection to named pipe
-```JSON
+```json
 {
 	"messageType": "GATEWAY_MESSAGE",
 	"command": "CONNECT",
@@ -30,14 +30,14 @@ Send a message  to pipe
 Respose status could be OK or ERROR. If OK, then response is set else error is set. 
 ```JSON
 {
-	"status": "OK"
+	"status": "OK",
 	"response": "Hello there"
 }
 ```
 
 ```JSON
 {
-	"status": "ERROR"
+	"status": "ERROR",
 	"error": "File not found"
 }
 ```
