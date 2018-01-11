@@ -22,6 +22,8 @@ public class Websocket2PipeGateway extends WebSocketServer
 
     private RandomAccessFile pipe;
 
+    private static final int DEFAULT_PORT = 12000;
+
     private static final String RESULT_OK = "OK";
 
     private static final String RESULT_NO_PIPE_CONNECTION = "NO PIPE CONNECTION";
@@ -30,7 +32,13 @@ public class Websocket2PipeGateway extends WebSocketServer
 
     public static void main(String[] args) throws IOException, InterruptedException
     {
-        Websocket2PipeGateway websocket2Pipe = new Websocket2PipeGateway();
+        int port = DEFAULT_PORT;
+        if (args.length == 1)
+        {
+            port = Integer.valueOf(args[0]);
+        }
+
+        Websocket2PipeGateway websocket2Pipe = new Websocket2PipeGateway(port);
         websocket2Pipe.start();
         System.out.println("Press enter to exit");
         try
@@ -46,7 +54,17 @@ public class Websocket2PipeGateway extends WebSocketServer
 
     public Websocket2PipeGateway()
     {
-        super(new InetSocketAddress("localhost", 12000));
+        this(DEFAULT_PORT);
+    }
+
+    /**
+     * Opens the web socket on localhost:port
+     * 
+     * @param port
+     */
+    public Websocket2PipeGateway(int port)
+    {
+        super(new InetSocketAddress("localhost", port));
     }
 
     @Override
