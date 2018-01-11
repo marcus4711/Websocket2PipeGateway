@@ -7,7 +7,7 @@ Create connection to named pipe
 {
 	"messageType": "GATEWAY_MESSAGE",
 	"command": "CONNECT",
-	"pipeName": "\\.\pipe\myPipe"
+	"pipeName": "\\.\\pipe\\myPipe"
 }
 ```
 
